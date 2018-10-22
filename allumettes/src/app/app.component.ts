@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   Arr = Array;
-  nbAllumettes:number = 20;
+  nbAllumettes:number = 5;
   nbAllumettesHumain:number = 0;
   nbAllumettesIA:number = 0;
   fini: boolean = false;
@@ -21,11 +21,7 @@ export class AppComponent {
     this.mauvaisJoueurIA = false;
     if (this.lastJoueur != 'humain')
     {
-      this.nbAllumettes -= n;
-      this.nbAllumettesHumain += n;
-      if(this.nbAllumettes < 0) {
-        this.nbAllumettes = 0;
-      }
+      this.nbAllumettesHumain = this.removeAllumettes(n, this.nbAllumettesHumain);
       this.lastJoueur = "humain";
       this.assertGagnant();
       console.log(this.lastJoueur);
@@ -40,13 +36,17 @@ export class AppComponent {
     {
       this.rand = Math.floor(Math.random() * 3);
       this.lastJoueur = "IA";
-      this.nbAllumettes -= this.rand == 0 ? 1: this.rand;
-      this.nbAllumettesIA += this.rand == 0 ? 1: this.rand;
+
+      if(this.rand == 0){
+        this.rand = 1;
+      }
+
+      this.nbAllumettesIA = this.removeAllumettes(this.rand, this.nbAllumettesIA);
       this.assertGagnant();
     } else {
       this.mauvaisJoueurIA = true;
     }
-  
+
   }
 
   assertGagnant() {
@@ -61,6 +61,20 @@ export class AppComponent {
           break;
       }
     }
+  }
+
+  removeAllumettes(nbAllumettesRemove: number, nbAllumettesWin : number){
+    var w = this.nbAllumettes;
+
+    if((w - nbAllumettesRemove) <= 0){
+      this.nbAllumettes = 0;
+      nbAllumettesWin = nbAllumettesWin + w;
+    }else {
+      this.nbAllumettes = this.nbAllumettes - nbAllumettesRemove;
+      nbAllumettesWin = nbAllumettesWin + nbAllumettesRemove;
+    }
+
+    return nbAllumettesWin;
   }
 
 }
