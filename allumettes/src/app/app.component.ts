@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   Arr = Array;
-  nbAllumettes:number = 5;
+  nbAllumettes:number = 20;
   nbAllumettesHumain:number = 0;
   nbAllumettesIA:number = 0;
   fini: boolean = false;
@@ -34,12 +34,9 @@ export class AppComponent {
     this.mauvaisJoueurHumain = false;
     if(this.lastJoueur != "IA")
     {
-      this.rand = Math.floor(Math.random() * 3);
+      this.rand = Math.floor(Math.random() * 3) + 1;
+      console.log(this.rand);
       this.lastJoueur = "IA";
-
-      if(this.rand == 0){
-        this.rand = 1;
-      }
 
       this.nbAllumettesIA = this.removeAllumettes(this.rand, this.nbAllumettesIA);
       this.assertGagnant();
