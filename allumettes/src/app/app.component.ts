@@ -63,4 +63,38 @@ export class AppComponent {
     }
   }
 
+   decisionMinMax() {
+     // call python
+   } 
+//
+// http://www.grappa.univ-lille3.fr/~torre/Enseignement/Cours/Intelligence-Artificielle/jeux.php
+//
+// { Décide du meilleur coup à jouer par le joueur J dans la situation e }
+// Début
+//   Pour chaque coup de CoupJouables(e,J) faire
+//     valeur[coup] = ValeurMinMax(Applique(coup,e),J,false)
+//   Fin pour
+//   retourner (coup tel que valeur[coup] est maximale)
+// Fin
+
+// Algorithme ValeurMinMax (e,J,EstUnEtatMax) 
+// { Calcule la valeur de e pour le joueur J selon que e EstUnEtatMax ou pas }
+// Début
+//   Si PartieGagnante(e,J) Alors retourner(+1)
+//   Sinon Si PartiePerdante(e,J) Alors retourner(-1)
+//         Sinon Si PartieNulle(e,J) Alors retourner(0)
+//               Sinon 
+//                  vals = vide
+//                  Pour s parmi les successeurs de e faire
+//                     ajouter ValeurMinMax(s,J,not(EstUnEtatMax))) à vals
+//                  Fin pour
+//                  Si EstUnEtatMax
+//                  Alors retourner(maximum de vals)
+//                  Sinon retourner(minimum de vals)
+//               Fin si
+//         Fin si
+//   Fin si
+// Fin
+
+
 }
