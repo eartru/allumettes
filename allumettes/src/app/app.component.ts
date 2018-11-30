@@ -21,11 +21,7 @@ export class AppComponent {
     this.mauvaisJoueurIA = false;
     if (this.lastJoueur != 'humain')
     {
-      this.nbAllumettes -= n;
-      this.nbAllumettesHumain += n;
-      if(this.nbAllumettes < 0) {
-        this.nbAllumettes = 0;
-      }
+      this.nbAllumettesHumain = this.removeAllumettes(n, this.nbAllumettesHumain);
       this.lastJoueur = "humain";
       this.assertGagnant();
       console.log(this.lastJoueur);
@@ -38,15 +34,16 @@ export class AppComponent {
     this.mauvaisJoueurHumain = false;
     if(this.lastJoueur != "IA")
     {
-      this.rand = Math.floor(Math.random() * 3);
+      this.rand = Math.floor(Math.random() * 3) + 1;
+      console.log(this.rand);
       this.lastJoueur = "IA";
-      this.nbAllumettes -= this.rand == 0 ? 1: this.rand;
-      this.nbAllumettesIA += this.rand == 0 ? 1: this.rand;
+
+      this.nbAllumettesIA = this.removeAllumettes(this.rand, this.nbAllumettesIA);
       this.assertGagnant();
     } else {
       this.mauvaisJoueurIA = true;
     }
-  
+
   }
 
   assertGagnant() {
@@ -63,6 +60,7 @@ export class AppComponent {
     }
   }
 
+<<<<<<< HEAD
    decisionMinMax() {
      // call python
    } 
@@ -96,5 +94,20 @@ export class AppComponent {
 //   Fin si
 // Fin
 
+=======
+  removeAllumettes(nbAllumettesRemove: number, nbAllumettesWin : number){
+    var w = this.nbAllumettes;
+
+    if((w - nbAllumettesRemove) <= 0){
+      this.nbAllumettes = 0;
+      nbAllumettesWin = nbAllumettesWin + w;
+    }else {
+      this.nbAllumettes = this.nbAllumettes - nbAllumettesRemove;
+      nbAllumettesWin = nbAllumettesWin + nbAllumettesRemove;
+    }
+
+    return nbAllumettesWin;
+  }
+>>>>>>> 5f886df2da154096926237088613495eb0c0e652
 
 }
