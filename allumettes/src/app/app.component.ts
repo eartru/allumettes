@@ -60,7 +60,6 @@ export class AppComponent {
     }
   }
 
-<<<<<<< HEAD
    decisionMinMax() {
      // call python
    } 
@@ -94,7 +93,6 @@ export class AppComponent {
 //   Fin si
 // Fin
 
-=======
   removeAllumettes(nbAllumettesRemove: number, nbAllumettesWin : number){
     var w = this.nbAllumettes;
 
@@ -108,6 +106,5 @@ export class AppComponent {
 
     return nbAllumettesWin;
   }
->>>>>>> 5f886df2da154096926237088613495eb0c0e652
 
 }
