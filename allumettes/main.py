@@ -1,8 +1,11 @@
 from interface.window import Window
+from game.Game import Game
+from game.IA import IA
 
 
 def main():
-    window = Window(IA=None)
+    game = Game(IA())
+    window = Window(game=game)
     window.start(width=300, height=200)
 
 
