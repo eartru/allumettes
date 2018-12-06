@@ -8,12 +8,12 @@ class Game(object):
 
     def player_removes(self, nb_matches):
         self.nb_matches -= nb_matches
-        self.state = GameState(nb_matches, self.nb_matches, 'Le joueur')
+        self.state = GameState(nb_matches, self.nb_matches, 'IA')
 
     def ia_removes(self):
-        nb_matches = self.IA.take_decision()
+        nb_matches = self.IA.take_decision(self.state.matches_left)
         self.nb_matches -= nb_matches
-        self.state = GameState(nb_matches, self.nb_matches, 'IA')
+        self.state = GameState(nb_matches, self.nb_matches, 'Le joueur')
 
 
 class GameState(object):
