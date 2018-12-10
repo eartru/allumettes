@@ -102,7 +102,7 @@ class Window(object):
     def show_victory_screen(self):
         self.reset_image()
         self.reset_text()
-        text = '{} à gagné'.format(self.game.state.player)
+        text = '{} à gagné'.format(self.game.state.winner)
         pygame.font.init()
         font = pygame.font.Font(pygame.font.get_default_font(), 30)
         blit_text(self.window, text, (100, 100), font)

@@ -1,4 +1,5 @@
 from random import randint
+from game.utils import timing
 
 
 class IA(object):
@@ -15,10 +16,11 @@ class IA(object):
     def _take_dumb_decision(self):
         return randint(1, 3)
 
+    @timing
     def _take_smart_decision(self, nb_match):
         root = Node(nb_match)
         root.make_children()
-        return root.max()
+        return root.get_max_node().value
 
 
 class Node(object):
@@ -35,14 +37,15 @@ class Node(object):
             self.weight = 1 if self.depth % 2 == 0 else -1
 
     def make_children(self):
-        for i in range(1, 4):
-            if self.match_left - i >= 0:
-                node = Node(self.match_left - i, self.depth + 1, i)
-                node.make_children()
-                self.children.append(node)
-                self.weight += node.weight
+        i = 1
+        while i < 4 and (self.match_left - i >= 0):
+            node = Node(self.match_left - i, self.depth + 1, i)
+            node.make_children()
+            self.children.append(node)
+            self.weight += node.weight
+            i += 1
 
-    def max(self):
+    def get_max_node(self):
         max_node = None
         for node in self.children:
             if not max_node:
@@ -50,5 +53,4 @@ class Node(object):
             if node.weight > max_node.weight:
                 max_node = node
 
-        return max_node.value
-
+        return max_node
