@@ -18,8 +18,8 @@ class Game(object):
 
 class GameState(object):
 
-    def __init__(self, matches_removed, matches_left, player):
-        self.player = player
+    def __init__(self, matches_removed, matches_left, winner):
+        self.winner = winner
         self.matches_removed = matches_removed
         self.matches_left = matches_left
         self.game_ended = matches_left <= 0

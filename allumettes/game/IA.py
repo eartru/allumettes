@@ -3,7 +3,7 @@ from random import randint
 
 class IA(object):
 
-    def __init__(self, is_smart=False):
+    def __init__(self, is_smart=True):
 
         self.is_smart = is_smart
 
@@ -17,34 +17,38 @@ class IA(object):
 
     def _take_smart_decision(self, nb_match):
         root = Node(nb_match)
-        best_node = None
-        for node in root.children():
-            if not best_node:
-                best_node = node
-            if node.weight > best_node.weight:
-                best_node = node
-
-        return best_node.value
+        root.make_children()
+        return root.max()
 
 
 class Node(object):
 
     children = None
-    match_left = 0
     weight = 0
 
-    def __init__(self, value, depth=0):
+    def __init__(self, match_left, depth=0, value=0):
         self.children = []
         self.value = value
         self.depth = depth
-        if value == 0:
+        self.match_left = match_left
+        if match_left == 0:
             self.weight = 1 if self.depth % 2 == 0 else -1
-        else:
-            self.make_children()
 
     def make_children(self):
         for i in range(1, 4):
-            if self.value - i >= 0:
-                node = Node(self.value - i, self.depth + 1)
+            if self.match_left - i >= 0:
+                node = Node(self.match_left - i, self.depth + 1, i)
+                node.make_children()
                 self.children.append(node)
                 self.weight += node.weight
+
+    def max(self):
+        max_node = None
+        for node in self.children:
+            if not max_node:
+                max_node = node
+            if node.weight > max_node.weight:
+                max_node = node
+
+        return max_node.value
+
