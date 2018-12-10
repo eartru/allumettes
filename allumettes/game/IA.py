@@ -6,7 +6,6 @@ class IA(object):
     def __init__(self, is_smart=False):
 
         self.is_smart = is_smart
-        self.build_tree
 
     def take_decision(self, nb_match):
         if self.is_smart:
@@ -17,23 +16,15 @@ class IA(object):
         return randint(1, 3)
 
     def _take_smart_decision(self, nb_match):
-        node = Node(nb_match)
+        root = Node(nb_match)
         best_node = None
-        for node_ in node.children():
+        for node in root.children():
             if not best_node:
-                best_node = node_
-            if node_.weight > best_node.weight:
-                best_node = node_
+                best_node = node
+            if node.weight > best_node.weight:
+                best_node = node
 
         return best_node.value
-
-    def build_tree(self, nb_match):
-        self.tree = Tree(nb_match)
-
-
-class Tree(object):
-    def __init__(self, nb_match):
-        self.nb_match = nb_match
 
 
 class Node(object):
