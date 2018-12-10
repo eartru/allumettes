@@ -69,6 +69,7 @@ class Window(object):
         self.game.player_removes(nb_match)
         if self.game.state.game_ended:
             self.show_victory_screen()
+            return
 
         self.set_image(nb_match=self.game.state.matches_left)
         self.set_text(

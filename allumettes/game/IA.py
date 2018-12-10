@@ -3,7 +3,7 @@ from random import randint
 
 class IA(object):
 
-    def __init__(self, is_smart=False):
+    def __init__(self, is_smart=True):
 
         self.is_smart = is_smart
         self.build_tree
@@ -19,7 +19,7 @@ class IA(object):
     def _take_smart_decision(self, nb_match):
         node = Node(nb_match)
         best_node = None
-        for node_ in node.children():
+        for node_ in node.children:
             if not best_node:
                 best_node = node_
             if node_.weight > best_node.weight:
