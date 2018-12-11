@@ -2,25 +2,27 @@ from random import randint
 from game.utils import timing
 
 
-class IA(object):
-
-    def __init__(self, is_smart=True):
-
-        self.is_smart = is_smart
-
-    def take_decision(self, nb_match):
-        if self.is_smart:
-            return self._take_smart_decision(nb_match)
-        return self._take_dumb_decision()
-
-    def _take_dumb_decision(self):
-        return randint(1, 3)
+class DumbIA(object):
 
     @timing
-    def _take_smart_decision(self, nb_match):
+    def take_decision(self, nb_match):
+        max_ = 3 if nb_match >= 3 else nb_match
+        return randint(1, max_)
+
+    def __str__(self):
+        return 'DumbIA'
+
+
+class MinMaxIA(object):
+
+    @timing
+    def take_decision(self, nb_match):
         root = Node(nb_match)
         root.make_children()
         return root.get_max_node().value
+
+    def __str__(self):
+        return 'MinMaxIA'
 
 
 class Node(object):
