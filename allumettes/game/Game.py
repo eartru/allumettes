@@ -42,7 +42,7 @@ class IAFight(object):
         while self.nb_matches > 0:
             ia = self.IA[i % 2]
             nb_matches = ia.take_decision(self.nb_matches)
-            print('{}IA {}: {} removed {}{}'.format(
+            print('{}IA {}: {} removed {}{}\n'.format(
                 Fore.YELLOW, (i % 2 + 1), ia, nb_matches, Style.RESET_ALL
             ))
             self.nb_matches -= nb_matches

@@ -1,5 +1,7 @@
 from random import randint
 from game.utils import timing
+from colorama import Fore
+from colorama import Style
 
 
 class RandomIA(object):
@@ -19,6 +21,9 @@ class MinMaxIA(object):
     def take_decision(self, nb_match):
         root = Node(nb_match)
         root.make_children()
+        print('{}{}{} Nodes were visited {}'.format(
+            Fore.RED, Style.BRIGHT, root.visited_node_count, Style.RESET_ALL
+        ))
         return root.get_max_node().value
 
     def __str__(self):
