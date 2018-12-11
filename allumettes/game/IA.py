@@ -2,7 +2,7 @@ from random import randint
 from game.utils import timing
 
 
-class DumbIA(object):
+class RandomIA(object):
 
     @timing
     def take_decision(self, nb_match):
@@ -10,7 +10,7 @@ class DumbIA(object):
         return randint(1, max_)
 
     def __str__(self):
-        return 'DumbIA'
+        return 'Random IA'
 
 
 class MinMaxIA(object):
@@ -22,11 +22,26 @@ class MinMaxIA(object):
         return root.get_max_node().value
 
     def __str__(self):
-        return 'MinMaxIA'
+        return 'Min Max IA'
+
+
+class MathIA(object):
+
+    @timing
+    def take_decision(self, nb_match):
+        for i in range(1, 4):
+            nb_match_left = nb_match - i
+            if nb_match_left % 4 == 1:
+                return i
+        return 1
+
+    def __str__(self):
+        return 'Math IA'
 
 
 class Node(object):
 
+    visited_node_count = 1
     children = None
     weight = 0
 
@@ -45,6 +60,7 @@ class Node(object):
             node.make_children()
             self.children.append(node)
             self.weight += node.weight
+            self.visited_node_count += node.visited_node_count
             i += 1
 
     def get_max_node(self):
