@@ -51,6 +51,7 @@ pip3 install colorama
 ```
 
 *For Windows users:*
+
 Download python 3 - 32bits(https://www.python.org/downloads/windows/) and execute the file .exe
 
 In your environment variables, add the path to python.exe dans to the pip.exe in the Scrpt directory
