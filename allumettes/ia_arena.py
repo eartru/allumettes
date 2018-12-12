@@ -3,10 +3,11 @@ from game.Game import IAFight
 from colorama import Fore
 from colorama import Style
 
-IA = {
+IA_CLASSES = {
     1: IA.RandomIA,
     2: IA.MathIA,
-    3: IA.MinMaxIA
+    3: IA.MinMaxIA,
+    4: IA.GraphMinMaxIA
 }
 
 
@@ -33,8 +34,9 @@ def main():
                 "    1: Random IA\n"
                 "    2: Math IA\n"
                 "    3: Min Max IA\n"
+                "    4: Min Max Using graph\n"
             ))
-            first_ia = IA.get(selection)
+            first_ia = IA_CLASSES.get(selection)
         except Exception:
             pass
 
@@ -45,8 +47,9 @@ def main():
                 "    1: Random IA\n"
                 "    2: Math IA\n"
                 "    3: Min Max IA\n"
+                "    4: Min Max Using graph\n"
             ))
-            second_ia = IA.get(selection)
+            second_ia = IA_CLASSES.get(selection)
         except Exception:
             pass
 

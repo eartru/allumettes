@@ -30,6 +30,15 @@ class MinMaxIA(object):
         return 'Min Max IA'
 
 
+class GraphMinMaxIA(object):
+
+    @timing
+    def take_decision(self, nb_match):
+        root = ReferencedNode(nb_match)
+        root.make_children()
+        return nb_match - root.get_max_node().match_left
+
+
 class MathIA(object):
 
     @timing
@@ -74,6 +83,58 @@ class Node(object):
             if not max_node:
                 max_node = node
             if node.weight > max_node.weight:
+                max_node = node
+
+        return max_node
+
+
+references = dict()
+
+
+class ReferencedNode(object):
+
+    get_weight = None
+
+    def __init__(self, match_left):
+        self.children = []
+        self.match_left = match_left
+        self.routes = []
+        if match_left == 0:
+            self.routes.append(1)
+
+    def make_children(self):
+        i = 1
+        while i < 4 and (self.match_left - i >= 0):
+            node = references.get(self.match_left - i, None)
+            if not node:
+                node = ReferencedNode(self.match_left - i)
+                references[self.match_left - i] = node
+                node.make_children()
+                node.make_route()
+
+            self.children.append(node)
+            i += 1
+
+    def make_route(self):
+        for child in self.children:
+            for route in child.routes:
+                self.routes.append(1 + route)
+
+    def get_weight(self):
+        self.weight = 0
+        for route in self.routes:
+            if route % 2 == 0:
+                self.weight += 1
+            else:
+                self.weight -= 1
+        return self.weight
+
+    def get_max_node(self):
+        max_node = None
+        for node in self.children:
+            if not max_node:
+                max_node = node
+            if node.get_weight() > max_node.get_weight():
                 max_node = node
 
         return max_node
