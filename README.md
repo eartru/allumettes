@@ -50,6 +50,21 @@ pip3 install pygame
 pip3 install colorama
 ```
 
+*For Windows users:*
+Download python 3 - 32bits(https://www.python.org/downloads/windows/) and execute the file .exe
+
+In your environment variables, add the path to python.exe dans to the pip.exe in the Scrpt directory
+
+Open the cmd and install some packages
+
+```
+pip install pygame
+pip install colorama
+```
+
+Execut the folowng command in the projet git repository to play the game
+`python main.py`
+
 ## Play the game
 
 `python3 main.py`
